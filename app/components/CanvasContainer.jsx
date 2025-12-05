@@ -10,7 +10,9 @@ export default function CanvasContainer({ children }) {
       gl={{ antialias: true }}
       style={{ height: "100vh", width: "100vw" }}
     >
-      <Suspense fallback={null}>{children}</Suspense>
+      <Suspense fallback={null}>
+        {children}
+      </Suspense>
     </Canvas>
   );
 }

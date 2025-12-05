@@ -4,25 +4,27 @@ import dynamic from "next/dynamic";
 import CanvasContainer from "./components/CanvasContainer";
 import OverlayIntro from "./components/OverlayIntro";
 
-// Load Scene 1 without SSR (required for WebGL)
-const Scene1_Tunnel = dynamic(
-  () => import("./components/Scene1_Tunnel"),
-  { ssr: false }
-);
+const Scene1_Tunnel = dynamic(() => import("./components/Scene1_Tunnel"), { ssr: false });
+const Scene2_AICore = dynamic(() => import("./components/Scene2_AICore"), { ssr: false });
 
 export default function Home() {
   return (
-    <main className="bg-black h-screen w-screen">
-      {/* 3D Canvas */}
-      <CanvasContainer>
-        <Scene1_Tunnel />
-      </CanvasContainer>
+    <main className="bg-black w-screen h-[600vh] relative">
+      
+      {/* FIXED 3D CANVAS (stays for ALL scroll height) */}
+      <div className="fixed top-0 left-0 w-screen h-screen z-0">
+        <CanvasContainer>
+          <Scene1_Tunnel />
+          <Scene2_AICore />
+        </CanvasContainer>
+      </div>
 
-      {/* Overlay Intro Text */}
+      {/* INTRO TEXT (fades out) */}
       <OverlayIntro />
 
-      {/* Extra scroll space for GSAP ScrollTrigger */}
-      <div style={{ height: "350vh" }} />
+      {/* SCROLL AREA (to drive GSAP) */}
+      <div id="scene2" className="absolute top-0 left-0 w-full h-[600vh]"></div>
+
     </main>
   );
 }

@@ -16,12 +16,12 @@ export default function SceneController({ camera }) {
       scrollTrigger: {
         trigger: document.body,
         start: "top top",
-        end: "bottom bottom",
+        end: "40% top",
         scrub: 1,
       },
     });
 
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+    return () => ScrollTrigger.killAll();
   }, [camera]);
 
   return null;
